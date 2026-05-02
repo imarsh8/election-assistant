@@ -1,0 +1,47 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Chat from './pages/Chat';
+import Compare from './pages/Compare';
+import VotingGuide from './pages/VotingGuide';
+import FakeNews from './pages/FakeNews';
+import Eligibility from './pages/Eligibility';
+
+const PrivateRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  return token ? children : <Navigate to="/login" />;
+};
+
+function App() {
+  return (
+    <Router>
+      <div className="app-container">
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route 
+              path="/chat" 
+              element={
+                <PrivateRoute>
+                  <Chat />
+                </PrivateRoute>
+              } 
+            />
+            <Route path="/compare" element={<Compare />} />
+            <Route path="/guide" element={<VotingGuide />} />
+            <Route path="/fake-news" element={<FakeNews />} />
+            <Route path="/eligibility" element={<Eligibility />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
