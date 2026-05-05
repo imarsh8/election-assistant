@@ -1,9 +1,9 @@
 # Election Assistant Pro
 
-A full-stack AI-powered web application designed to act as a smart, unbiased election assistant. It helps users understand elections, candidates, voting processes, and evaluate fake news using the Grok API (xAI).
+A full-stack AI-powered web application designed to act as a smart, unbiased election assistant. It helps users understand elections, candidates, voting processes, and evaluate fake news using the Ollama LLM.
 
 ## Features
-- **AI Chatbot**: Context-aware, neutral, and unbiased chat powered by Grok API.
+- **AI Chatbot**: Context-aware, neutral, and unbiased chat powered by OLLama.
 - **Candidate Comparison**: Impartial comparison of candidates' education, experience, and manifestos.
 - **Fake News Check**: Prompt-based classification to verify election-related claims.
 - **Eligibility Checker**: Simple tool to check voting eligibility.
@@ -13,7 +13,7 @@ A full-stack AI-powered web application designed to act as a smart, unbiased ele
 
 ## Tech Stack
 - **Frontend**: React (Vite), React Router, Lucide Icons
-- **Backend**: Node.js, Express, MySQL, JSON Web Tokens (JWT), Axios, OpenAI SDK
+- **Backend**: Node.js, Express, MySQL, JSON Web Tokens (JWT), Axios
 - **Deployment**: Docker, Google Cloud Run
 
 ## Setup Instructions for Local Development
@@ -28,22 +28,17 @@ A full-stack AI-powered web application designed to act as a smart, unbiased ele
 
 ### 2. Environment Variables
 In the \`backend\` folder, modify the \`.env\` file as needed:
-\`\`\`env
-GROK_API_KEY=your_xai_grok_api_key
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=election_assistant
 JWT_SECRET=supersecretjwtkey
 PORT=8080
-\`\`\`
-
 ### 3. Run Backend
 \`\`\`bash
 cd backend
 npm install
 node server.js
-\`\`\`
 The backend will run on \`http://localhost:8080\`.
 
 ### 4. Run Frontend
@@ -72,21 +67,21 @@ docker build -t election-assistant-pro .
 gcloud auth configure-docker
 
 # Tag image
-docker tag election-assistant-pro gcr.io/YOUR_PROJECT_ID/election-assistant-pro
+docker tag election-assistant-pro gcr.ioelection-assistant-pro
 
 # Push image
-docker push gcr.io/YOUR_PROJECT_ID/election-assistant-pro
+docker push gcr.ioelection-assistant-pro
 \`\`\`
 
 ### 3. Deploy to Cloud Run
 \`\`\`bash
-gcloud run deploy election-assistant-pro \\
-  --image gcr.io/YOUR_PROJECT_ID/election-assistant-pro \\
-  --platform managed \\
-  --region us-central1 \\
-  --allow-unauthenticated \\
-  --port 8080 \\
-  --set-env-vars="GROK_API_KEY=your_api_key,DB_HOST=your_cloud_sql_ip,DB_USER=root,DB_PASSWORD=your_db_pass,DB_NAME=election_assistant,JWT_SECRET=prod_secret_key"
-\`\`\`
+gcloud run deploy election-assistant-pro
+  --image gcr.io/YOUR_PROJECT_ID/election-assistant-pro 
+  --platform managed
+  --region us-central1
+  --allow-unauthenticated
+  --port 8080 
+  --set-env-
+  DB_HOST=your_cloud_sql_ip,DB_USER=root,DB_PASSWORD=your_db_pass,DB_NAME=election_assistant,JWT_SECRET=prod_secret_key"
 
-*(Note: For production database on Cloud SQL, ensure the Cloud Run service has the correct service account and VPC Connector/Cloud SQL Auth Proxy set up, or use public IP if configured)*
+
